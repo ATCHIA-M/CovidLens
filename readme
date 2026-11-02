@@ -1,0 +1,84 @@
+# 🦠 CovidLens: Exploratory Data Analysis on COVID-19 Data
+
+An interactive dashboard that cleans raw COVID-19 data and turns it into trends, country rankings, vaccination progress and correlations. Built with **Python, Pandas, Streamlit and Plotly** using the Our World in Data (OWID) dataset.
+
+Course project: Data Science Lab, Dept. of AI & DS, Francis Xavier Engineering College.
+
+---
+
+## Features
+
+- **Data cleaning:** removes duplicates, aggregate rows (World, continents, income groups), negative values and missing entries
+- **Derived metrics:** case fatality rate, cases per million, 7-day moving average
+- **KPI cards:** total cases, total deaths, fatality rate, total vaccinations
+- **Trend analysis:** daily (7-day average) and monthly new cases
+- **Country analysis:** top 10 countries by total cases
+- **Correlation heatmap:** cases, deaths, vaccinations and cases per million
+- **Interactive filters:** country and date range, with all charts updating live
+- **Data quality summary** and **CSV download** of the filtered data
+
+## Project structure
+
+```
+covid19_project_report/
+├── app.py                 # Streamlit dashboard (cleaning + analysis + charts)
+├── owid-covid-data.csv    # Dataset (auto-downloaded on first run)
+└── README.md
+```
+
+## Requirements
+
+- Python 3.9 or newer
+- Packages: `streamlit`, `pandas`, `plotly`
+
+```bash
+pip install streamlit pandas plotly
+```
+
+## How to run
+
+```bash
+cd covid19_project_report
+streamlit run app.py
+```
+
+The app opens at `http://localhost:8501`.
+
+## Dataset
+
+Source: [Our World in Data, COVID-19 dataset](https://docs.owid.io/projects/etl/api/covid/)
+
+On the first run, `app.py` downloads the compact CSV automatically from:
+
+```
+https://catalog.ourworldindata.org/garden/covid/latest/compact/compact.csv
+```
+
+and saves it as `owid-covid-data.csv` next to `app.py`. If the download fails (no internet or a blocked link), download the file manually from the page above and save it with that name in the project folder.
+
+> Note: the old GitHub copy of the dataset (`owid/covid-19-data`) is no longer updated, so use the link above.
+
+## How it works
+
+1. **Load:** read the CSV and rename columns if needed
+2. **Clean:** drop duplicates, remove aggregate rows, fix negatives, fill missing values
+3. **Calculate:** fatality rate, cases per million, 7-day average
+4. **Filter:** user selects countries and a date range
+5. **Visualise:** KPIs, trend charts, top 10, heatmap
+6. **Export:** download the filtered data as CSV
+
+## Troubleshooting
+
+| Problem                                  | Fix                                                                                                                     |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `FileNotFoundError: owid-covid-data.csv` | Run `streamlit run app.py` from the project folder, or download the CSV manually                                        |
+| `NameError: name 'df' is not defined`    | Make sure `df, raw_rows = load_data()` appears right after the `load_data()` function                                   |
+| `KeyError` on a column name              | Print the columns with `pd.read_csv("owid-covid-data.csv", nrows=3).columns.tolist()` and adjust names in `load_data()` |
+
+## Future scope
+
+Forecasting (ARIMA / Prophet), real-time data refresh, state-level analysis, wave detection, interactive world map, cloud deployment.
+
+## Author
+
+ATCHIA M
