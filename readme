@@ -79,6 +79,10 @@ and saves it as `owid-covid-data.csv` next to `app.py`. If the download fails (n
 
 Forecasting (ARIMA / Prophet), real-time data refresh, state-level analysis, wave detection, interactive world map, cloud deployment.
 
+## link 
+
+https://covidlens-atc.streamlit.app/
+
 ## Author
 
 ATCHIA M
